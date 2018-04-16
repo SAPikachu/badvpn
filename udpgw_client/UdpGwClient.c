@@ -156,7 +156,13 @@ static void recv_interface_handler_send (UdpGwClient *o, uint8_t *data, int data
     
     // check remote address
     if (BAddr_CompareOrder(&con->conaddr.remote_addr, &remote_addr) != 0) {
-        BLog(BLOG_ERROR, "wrong remote address");
+        char conaddr[1024];
+        char packetaddr[1024];
+        memset(conaddr, 0, sizeof(conaddr));
+        memset(packetaddr, 0, sizeof(packetaddr));
+        BAddr_Print(&con->conaddr.remote_addr, conaddr);
+        BAddr_Print(&remote_addr, packetaddr);
+        BLog(BLOG_ERROR, "wrong remote address (len: %d, conid: %d, conaddr: %s, packetaddr: %s)", data_len, conid, conaddr, packetaddr);
         return;
     }
     

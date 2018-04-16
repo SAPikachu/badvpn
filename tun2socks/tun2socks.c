@@ -274,7 +274,7 @@ int main (int argc, char **argv)
     // initialize logger
     switch (options.logger) {
         case LOGGER_STDOUT:
-            BLog_InitStdout();
+            BLog_InitStderr();
             break;
         #ifndef BADVPN_USE_WINAPI
         case LOGGER_SYSLOG:
